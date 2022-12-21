@@ -9,6 +9,18 @@ const Navbar = styled.section`
   justify-content: space-between;
   padding: 10px;
 `;
+
+const ImageWrapper = styled.div`
+  width: 90%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: white;
+`;
+
+
 export default function Product() {
   return <div>
     <Navbar>
@@ -19,5 +31,8 @@ export default function Product() {
         <img src='/basket.svg' alt='basket' style={{ width: 25 }}/>
       </IconButton>
     </Navbar>
+    <ImageWrapper>
+      <img src='/philips-plumen.jpg' alt='Philips Plumen bulb' style={{ width: "100%" }}/>
+    </ImageWrapper>
   </div>;
 }
