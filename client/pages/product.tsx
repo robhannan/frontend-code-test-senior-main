@@ -3,6 +3,30 @@ import styled from "styled-components";
 import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
 import { useQuery, gql } from '@apollo/client';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#f050f8',
+      contrastText: "#100030"
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "10px",
+          "&.Mui-disabled": {
+            background: "#600e6b",
+            color: "#fff"
+          }
+        }
+      }
+    }
+  }
+});
+
 
 const Navbar = styled.section`
   display: flex;
@@ -35,6 +59,15 @@ const ProductOverview = styled.p`
 `;
 const ProductHeader = styled.h2`
   font-size: large;
+`;
+
+const PurchaseDetails = styled.span`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const PurchaseQty = styled.div`
+  
 `;
 
 const ProductDescription = styled.section`
@@ -86,7 +119,10 @@ export default function Product() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
 
+  let quantity = 1;
+
   return <div>
+    <ThemeProvider theme={theme}>
       <Navbar>
         <Button size="small">
           <img src='/octopus-logo.svg' alt='octopus logo' style={{ width: 180 }}/>
@@ -101,7 +137,31 @@ export default function Product() {
       <ProductDetails>
         <ProductName>{ data.Product.name }</ProductName>
         <ProductOverview>{ data.Product.power } // Packet of { data.Product.quantity }</ProductOverview>
-        <ProductHeader>£12.99</ProductHeader>
+        <PurchaseDetails>
+          <ProductHeader>£{ data.Product.price/100 }</ProductHeader>
+          <PurchaseDetails>
+            <Button
+              variant="contained" 
+              style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }} 
+              disabled={quantity == 1}
+              onClick={() => {  }}>
+                -
+            </Button>
+            <span>
+              Qty
+              <PurchaseQty>
+                { quantity }
+              </PurchaseQty>
+            </span>
+            <Button
+              variant="contained" 
+              style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
+              onClick={() => {  }}>
+                +
+            </Button>
+          </PurchaseDetails>
+        </PurchaseDetails>
+        <Button variant="contained" style={{ width: "100%", padding: "15px", marginTop:"20px", marginBottom:"20px" }}>Add to cart</Button>
       </ProductDetails>
       <ProductDescription>
         <ProductDetails>
@@ -113,26 +173,28 @@ export default function Product() {
         <ProductDetails>
           <ProductHeader>Specifications</ProductHeader>
           <SpecificationTable>
-            <tr>
-              <td>Brand</td>
-              <td>{ data.Product.brand }</td>
-            </tr>
-            <tr>
-              <td>Item weight</td>
-              <td>{ data.Product.weight }</td>
-            </tr>
-            <tr>
-              <td>Dimensions</td>
-              <td>{ data.Product.height } x { data.Product.width } x { data.Product.length }</td>
-            </tr>
-            <tr>
-              <td>Item Model number</td>
-              <td>{ data.Product.model_code }</td>
-            </tr>
-            <tr>
-              <td>Colour</td>
-              <td>{ data.Product.colour }</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>Brand</td>
+                <td>{ data.Product.brand }</td>
+              </tr>
+              <tr>
+                <td>Item weight</td>
+                <td>{ data.Product.weight }</td>
+              </tr>
+              <tr>
+                <td>Dimensions</td>
+                <td>{ data.Product.height } x { data.Product.width } x { data.Product.length }</td>
+              </tr>
+              <tr>
+                <td>Item Model number</td>
+                <td>{ data.Product.model_code }</td>
+              </tr>
+              <tr>
+                <td>Colour</td>
+                <td>{ data.Product.colour }</td>
+              </tr>
+            </tbody>
           </SpecificationTable>
         </ProductDetails>
       </ProductSpecifications>
@@ -142,5 +204,6 @@ export default function Product() {
         London, EC1N 2HT. Trading office: 20-24 Broadwick Street, London,
         W1F 8HT
       </PageCopy>
-    </div>
+    </ThemeProvider>
+  </div>
 }
