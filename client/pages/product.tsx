@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
+import { useQuery, gql } from '@apollo/client';
 
 const Navbar = styled.section`
   display: flex;
@@ -20,8 +21,32 @@ const ImageWrapper = styled.div`
   background-color: white;
 `;
 
+const GET_PRODUCT = gql`
+  query GetProduct {
+    Product(id: 1) {
+      name
+      power
+      description
+      price
+      quantity
+      brand
+      weight
+      height
+      width
+      length
+      model_code
+      colour
+      img_url
+    }
+  }
+`;
 
 export default function Product() {
+  const { loading, error, data } = useQuery(GET_PRODUCT);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error : {error.message}</p>;
+
   return <div>
     <Navbar>
       <Button size="small">
