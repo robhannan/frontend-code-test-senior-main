@@ -11,7 +11,7 @@ const Navbar = styled.section`
   padding: 10px;
 `;
 
-const ImageWrapper = styled.div`
+const ProductImage = styled.div`
   width: 90%;
   margin-top: 20px;
   margin-left: auto;
@@ -19,6 +19,36 @@ const ImageWrapper = styled.div`
   border-radius: 15px;
   overflow: hidden;
   background-color: white;
+`;
+
+const ProductDetails = styled.section`
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+
+const ProductName = styled.h1`
+  font-size: x-large;
+`;
+
+const ProductOverview = styled.p`
+  
+`;
+const ProductHeader = styled.h2`
+  font-size: large;
+`;
+
+const ProductDescription = styled.section`
+  background-color: var(--hemocyanin);
+`;
+
+const ProductSpecifications = styled.section`
+  margin-bottom: 15px;
+`;
+
+const PageCopy = styled.section`
+  padding-left: 20px;
+  padding-right: 10px;
+  font-size: x-small;
 `;
 
 const GET_PRODUCT = gql`
@@ -48,16 +78,56 @@ export default function Product() {
   if (error) return <p>Error : {error.message}</p>;
 
   return <div>
-    <Navbar>
-      <Button size="small">
-        <img src='/octopus-logo.svg' alt='octopus logo' style={{ width: 180 }}/>
-      </Button>
-      <IconButton size="small">
-        <img src='/basket.svg' alt='basket' style={{ width: 25 }}/>
-      </IconButton>
-    </Navbar>
-    <ImageWrapper>
-      <img src='/philips-plumen.jpg' alt='Philips Plumen bulb' style={{ width: "100%" }}/>
-    </ImageWrapper>
-  </div>;
+      <Navbar>
+        <Button size="small">
+          <img src='/octopus-logo.svg' alt='octopus logo' style={{ width: 180 }}/>
+        </Button>
+        <IconButton size="small">
+          <img src='/basket.svg' alt='basket' style={{ width: 25 }}/>
+        </IconButton>
+      </Navbar>
+      <ProductImage>
+        <img src='/philips-plumen.jpg' alt='Philips Plumen bulb' style={{ width: "100%" }}/>
+      </ProductImage>
+      <ProductDetails>
+        <ProductName>{ data.Product.name }</ProductName>
+        <ProductOverview>{ data.Product.power } // Packet of { data.Product.quantity }</ProductOverview>
+        <ProductHeader>£12.99</ProductHeader>
+        <ProductDescription>
+          <ProductHeader>Description</ProductHeader>
+          <p>{ data.Product.description }</p>
+        </ProductDescription>
+        <ProductSpecifications>
+          <ProductHeader>Specifications</ProductHeader>
+          <table>
+            <tr>
+              <td>Brand</td>
+              <td>{ data.Product.brand }</td>
+            </tr>
+            <tr>
+              <td>Item weight</td>
+              <td>{ data.Product.weight }</td>
+            </tr>
+            <tr>
+              <td>Dimensions</td>
+              <td>{ data.Product.height } x { data.Product.width } x { data.Product.length }</td>
+            </tr>
+            <tr>
+              <td>Item Model number</td>
+              <td>{ data.Product.model_code }</td>
+            </tr>
+            <tr>
+              <td>Colour</td>
+              <td>{ data.Product.colour }</td>
+            </tr>
+          </table>
+        </ProductSpecifications>
+      </ProductDetails>
+      <PageCopy>
+        Octopus Energy Ltd is a company registered in England and Wales.
+        Registered number: 09263424. Registered office 33 Holborn,
+        London, EC1N 2HT. Trading office: 20-24 Broadwick Street, London,
+        W1F 8HT
+      </PageCopy>
+    </div>
 }
