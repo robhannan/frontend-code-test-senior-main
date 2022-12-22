@@ -38,6 +38,8 @@ const ProductHeader = styled.h2`
 `;
 
 const ProductDescription = styled.section`
+  padding-top: 10px;
+  padding-bottom: 5px;
   background-color: var(--hemocyanin);
 `;
 
@@ -45,10 +47,17 @@ const ProductSpecifications = styled.section`
   margin-bottom: 15px;
 `;
 
+const SpecificationTable = styled.table`
+  border-spacing: 15px;
+`;
+
 const PageCopy = styled.section`
   padding-left: 20px;
   padding-right: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   font-size: x-small;
+  background-color: var(--hemocyanin);
 `;
 
 const GET_PRODUCT = gql`
@@ -93,13 +102,17 @@ export default function Product() {
         <ProductName>{ data.Product.name }</ProductName>
         <ProductOverview>{ data.Product.power } // Packet of { data.Product.quantity }</ProductOverview>
         <ProductHeader>£12.99</ProductHeader>
-        <ProductDescription>
+      </ProductDetails>
+      <ProductDescription>
+        <ProductDetails>
           <ProductHeader>Description</ProductHeader>
           <p>{ data.Product.description }</p>
-        </ProductDescription>
-        <ProductSpecifications>
+        </ProductDetails>
+      </ProductDescription>
+      <ProductSpecifications>
+        <ProductDetails>
           <ProductHeader>Specifications</ProductHeader>
-          <table>
+          <SpecificationTable>
             <tr>
               <td>Brand</td>
               <td>{ data.Product.brand }</td>
@@ -120,9 +133,9 @@ export default function Product() {
               <td>Colour</td>
               <td>{ data.Product.colour }</td>
             </tr>
-          </table>
-        </ProductSpecifications>
-      </ProductDetails>
+          </SpecificationTable>
+        </ProductDetails>
+      </ProductSpecifications>
       <PageCopy>
         Octopus Energy Ltd is a company registered in England and Wales.
         Registered number: 09263424. Registered office 33 Holborn,
