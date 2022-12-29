@@ -114,12 +114,19 @@ const GET_PRODUCT = gql`
 `;
 
 export default function Product() {
+  const [quantity, setQuantity] = React.useState(1);
   const { loading, error, data } = useQuery(GET_PRODUCT);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
 
-  let quantity = 1;
+  const incrementQty = () => {
+    setQuantity(quantity + 1)
+  }
+
+  const decrementQty = () => {
+    setQuantity(quantity - 1)
+  }
 
   return <div>
     <ThemeProvider theme={theme}>
@@ -144,7 +151,7 @@ export default function Product() {
               variant="contained" 
               style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }} 
               disabled={quantity == 1}
-              onClick={() => {  }}>
+              onClick={decrementQty}>
                 -
             </Button>
             <span>
@@ -156,7 +163,7 @@ export default function Product() {
             <Button
               variant="contained" 
               style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
-              onClick={() => {  }}>
+              onClick={incrementQty}>
                 +
             </Button>
           </PurchaseDetails>
