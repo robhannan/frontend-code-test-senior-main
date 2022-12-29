@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
+import Badge from '@mui/material/Badge';
 import { useQuery, gql } from '@apollo/client';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -115,6 +116,7 @@ const GET_PRODUCT = gql`
 
 export default function Product() {
   const [quantity, setQuantity] = React.useState(1);
+  const [basketQty, setBasketQty] = React.useState(0);
   const { loading, error, data } = useQuery(GET_PRODUCT);
 
   if (loading) return <p>Loading...</p>;
@@ -128,15 +130,22 @@ export default function Product() {
     setQuantity(quantity - 1)
   }
 
+  const updateBasket = () => {
+    setBasketQty(basketQty + quantity)
+    setQuantity(1)
+  }
+
   return <div>
     <ThemeProvider theme={theme}>
       <Navbar>
         <Button size="small">
           <img src='/octopus-logo.svg' alt='octopus logo' style={{ width: 180 }}/>
         </Button>
-        <IconButton size="small">
-          <img src='/basket.svg' alt='basket' style={{ width: 25 }}/>
-        </IconButton>
+        <Badge color="primary" badgeContent={basketQty}>
+          <IconButton size="small">
+            <img src='/basket.svg' alt='basket' style={{ width: 25 }}/>
+          </IconButton>
+        </Badge>
       </Navbar>
       <ProductImage>
         <img src='/philips-plumen.jpg' alt='Philips Plumen bulb' style={{ width: "100%" }}/>
@@ -168,7 +177,17 @@ export default function Product() {
             </Button>
           </PurchaseDetails>
         </PurchaseDetails>
-        <Button variant="contained" style={{ width: "100%", padding: "15px", marginTop:"20px", marginBottom:"20px" }}>Add to cart</Button>
+        <Button
+          variant="contained"
+          style={{ 
+            width: "100%", 
+            padding: "15px", 
+            marginTop:"20px", 
+            marginBottom:"20px" 
+          }}
+          onClick={updateBasket}>
+          Add to cart
+        </Button>
       </ProductDetails>
       <ProductDescription>
         <ProductDetails>
