@@ -31,6 +31,29 @@ const mocks = [
   }
 ];
 
+test("should show a loading screen instead of full page content until the product info is available", async() => {
+  const { queryByText, queryByTitle } = render(
+    <MockedProvider>
+      <Product />
+    </MockedProvider>
+  );
+
+  expect(queryByText('Loading...')).toBeTruthy();
+  expect(queryByTitle('Product')).toBeNull();
+});
+
+test("should show full page content instead of loading screen if product info is available", async() => {
+  const { findByText, queryByText, queryByTitle } = render(
+    <MockedProvider mocks={mocks}>
+      <Product />
+    </MockedProvider>
+  );
+
+  await findByText("Product Name");
+  expect(queryByText('Loading...')).toBeNull();
+  expect(queryByTitle('Product')).toBeTruthy();
+});
+
 test("should be able to increase and decrease product quantity", async () => {
   const { findByText, getByText, getByTitle } = render(
     <MockedProvider mocks={mocks}>
@@ -49,6 +72,25 @@ test("should be able to increase and decrease product quantity", async () => {
   expect(currentQuantity).toHaveTextContent("2");
 
   const decreaseQuantity = getByText("-");
+
+  fireEvent.click(decreaseQuantity);
+  expect(currentQuantity).toHaveTextContent("1");
+});
+
+test("should not be able to decrease product quantity below 1", async() => {
+  const { findByText, getByText, getByTitle } = render(
+    <MockedProvider mocks={mocks}>
+      <Product />
+    </MockedProvider>
+  );
+
+  await findByText("Product Name");
+
+  const decreaseQuantity = getByText("-");
+
+  const currentQuantity = getByTitle("Current quantity");
+  expect(currentQuantity).toHaveTextContent("1");
+  expect(decreaseQuantity).toBeDisabled();
 
   fireEvent.click(decreaseQuantity);
   expect(currentQuantity).toHaveTextContent("1");
@@ -79,48 +121,6 @@ test("should be able to add items to the basket", async () => {
   expect(basketItems).toHaveTextContent("4");
 });
 
-test("should show a loading screen instead of full page content until the product info is available", async() => {
-  const { queryByText, queryByTitle } = render(
-    <MockedProvider>
-      <Product />
-    </MockedProvider>
-  );
-
-  expect(queryByText('Loading...')).toBeTruthy();
-  expect(queryByTitle('Product')).toBeNull();
-});
-
-test("should show full page content instead of loading screen if product info is available", async() => {
-  const { findByText, queryByText, queryByTitle } = render(
-    <MockedProvider mocks={mocks}>
-      <Product />
-    </MockedProvider>
-  );
-
-  await findByText("Product Name");
-  expect(queryByText('Loading...')).toBeNull();
-  expect(queryByTitle('Product')).toBeTruthy();
-});
-
-test("should not be able to decrease product quantity below 1", async() => {
-  const { findByText, getByText, getByTitle } = render(
-    <MockedProvider mocks={mocks}>
-      <Product />
-    </MockedProvider>
-  );
-
-  await findByText("Product Name");
-
-  const decreaseQuantity = getByText("-");
-
-  const currentQuantity = getByTitle("Current quantity");
-  expect(currentQuantity).toHaveTextContent("1");
-  expect(decreaseQuantity).toBeDisabled();
-
-  fireEvent.click(decreaseQuantity);
-  expect(currentQuantity).toHaveTextContent("1");
-});
-
 test("should be able to add multiple batches of items to the basket and combine the quantites", async() => {
   const { findByText, getByText, getByTitle } = render(
     <MockedProvider mocks={mocks}>
@@ -146,4 +146,3 @@ test("should be able to add multiple batches of items to the basket and combine 
   const basketItems = getByTitle("Basket items");
   expect(basketItems).toHaveTextContent("8");
 });
-
