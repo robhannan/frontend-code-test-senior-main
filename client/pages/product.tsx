@@ -122,7 +122,7 @@ export default function Product() {
         <Button size="small">
           <img src='/octopus-logo.svg' alt='octopus logo' style={{ width: 180 }}/>
         </Button>
-        <Badge color="primary" badgeContent={basketQty}>
+        <Badge color="primary" badgeContent={basketQty} title="Basket items">
           <IconButton size="small">
             <img src='/basket.svg' alt='basket' style={{ width: 25 }}/>
           </IconButton>
@@ -146,7 +146,7 @@ export default function Product() {
             </Button>
             <span>
               Qty
-              <PurchaseQty>
+              <PurchaseQty title="Current quantity">
                 { quantity }
               </PurchaseQty>
             </span>
