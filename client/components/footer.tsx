@@ -2,12 +2,12 @@ import styled from "styled-components";
 import React from 'react';
 
 const Wrapper = styled.section`
-    padding-left: 20px;
-    padding-right: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: x-small;
-    background-color: var(--hemocyanin);
+  padding-left: 20px;
+  padding-right: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: x-small;
+  background-color: var(--hemocyanin);
 `;
 
 class Footer extends React.Component {

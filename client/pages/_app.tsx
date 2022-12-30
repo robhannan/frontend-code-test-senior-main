@@ -21,8 +21,8 @@ const theme = createTheme({
         root: {
           borderRadius: "10px",
           "&.Mui-disabled": {
-            background: "#600e6b",
-            color: "#fff"
+            background: "var(--plum)",
+            color: "var(--ice)"
           }
         }
       }

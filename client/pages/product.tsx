@@ -27,7 +27,7 @@ const ProductName = styled.h1`
 
 const ProductOverview = styled.p`
   font-size: smaller;
-  color: var(--purpleHaze)
+  color: var(--purpleHaze);
 `;
 
 const ProductHeader = styled.h2`
