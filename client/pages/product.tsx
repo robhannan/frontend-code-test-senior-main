@@ -95,12 +95,12 @@ export default function Product() {
             onClick={decrementQty}>
               -
           </Button>
-          <span>
+          <div style={{textAlign: "center"}}>
             Qty
             <PurchaseQty title="Current quantity">
               { quantity }
             </PurchaseQty>
-          </span>
+          </div>
           <Button
             variant="contained" 
             style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
