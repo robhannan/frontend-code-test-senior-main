@@ -1,32 +1,9 @@
 import { useQuery } from '@apollo/client';
 import Button from '@mui/material/Button';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from "react";
 import styled from "styled-components";
 import Navbar from "../components/navbar";
 import { GET_PRODUCT } from '../schema/queries.js';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#f050f8',
-      contrastText: "#100030"
-    },
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: "10px",
-          "&.Mui-disabled": {
-            background: "#600e6b",
-            color: "#fff"
-          }
-        }
-      }
-    }
-  }
-});
 
 const ProductImage = styled.div`
   width: 90%;
@@ -109,7 +86,6 @@ export default function Product() {
   }
 
   return <div>
-    <ThemeProvider theme={theme}>
       <Navbar basketQty={basketQty}/>
       <ProductImage>
         <img src='/philips-plumen.jpg' alt='Philips Plumen bulb' style={{ width: "100%" }}/>
@@ -194,6 +170,5 @@ export default function Product() {
         London, EC1N 2HT. Trading office: 20-24 Broadwick Street, London,
         W1F 8HT
       </PageCopy>
-    </ThemeProvider>
   </div>
 }
