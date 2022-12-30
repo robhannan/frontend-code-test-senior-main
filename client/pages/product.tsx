@@ -39,7 +39,7 @@ const PurchaseDetails = styled.span`
 `;
 
 const PurchaseQty = styled.div`
-  
+  text-align: center;
 `;
 
 const ProductDescription = styled.section`
@@ -95,12 +95,12 @@ export default function Product() {
             onClick={decrementQty}>
               -
           </Button>
-          <div style={{textAlign: "center"}}>
+          <PurchaseQty>
             Qty
-            <PurchaseQty title="Current quantity">
+            <div title="Current quantity">
               { quantity }
-            </PurchaseQty>
-          </div>
+            </div>
+          </PurchaseQty>
           <Button
             variant="contained" 
             style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
