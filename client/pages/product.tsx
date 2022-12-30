@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
 import Badge from '@mui/material/Badge';
+import { GET_PRODUCT } from '../schema/queries.js'
 import { useQuery, gql } from '@apollo/client';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -92,26 +93,6 @@ const PageCopy = styled.section`
   padding-bottom: 20px;
   font-size: x-small;
   background-color: var(--hemocyanin);
-`;
-
-const GET_PRODUCT = gql`
-  query GetProduct {
-    Product(id: 1) {
-      name
-      power
-      description
-      price
-      quantity
-      brand
-      weight
-      height
-      width
-      length
-      model_code
-      colour
-      img_url
-    }
-  }
 `;
 
 export default function Product() {
