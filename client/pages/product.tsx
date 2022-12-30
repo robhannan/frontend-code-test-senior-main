@@ -1,11 +1,10 @@
+import { useQuery } from '@apollo/client';
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from "react";
 import styled from "styled-components";
-import Button from '@mui/material/Button';
-import IconButton from "@mui/material/IconButton";
-import Badge from '@mui/material/Badge';
-import { GET_PRODUCT } from '../schema/queries.js'
-import { useQuery, gql } from '@apollo/client';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Navbar from "../components/navbar";
+import { GET_PRODUCT } from '../schema/queries.js';
 
 const theme = createTheme({
   palette: {
@@ -29,14 +28,6 @@ const theme = createTheme({
   }
 });
 
-
-const Navbar = styled.section`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px;
-`;
-
 const ProductImage = styled.div`
   width: 90%;
   margin-top: 20px;
@@ -59,6 +50,7 @@ const ProductName = styled.h1`
 const ProductOverview = styled.p`
   
 `;
+
 const ProductHeader = styled.h2`
   font-size: large;
 `;
@@ -118,16 +110,7 @@ export default function Product() {
 
   return <div>
     <ThemeProvider theme={theme}>
-      <Navbar>
-        <Button size="small">
-          <img src='/octopus-logo.svg' alt='octopus logo' style={{ width: 180 }}/>
-        </Button>
-        <Badge color="primary" badgeContent={basketQty} title="Basket items">
-          <IconButton size="small">
-            <img src='/basket.svg' alt='basket' style={{ width: 25 }}/>
-          </IconButton>
-        </Badge>
-      </Navbar>
+      <Navbar basketQty={basketQty}/>
       <ProductImage>
         <img src='/philips-plumen.jpg' alt='Philips Plumen bulb' style={{ width: "100%" }}/>
       </ProductImage>
