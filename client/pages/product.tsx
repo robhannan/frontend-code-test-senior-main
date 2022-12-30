@@ -132,7 +132,7 @@ export default function Product() {
         <img src='/philips-plumen.jpg' alt='Philips Plumen bulb' style={{ width: "100%" }}/>
       </ProductImage>
       <ProductDetails>
-        <ProductName>{ data.Product.name }</ProductName>
+        <ProductName title="Product">{ data.Product.name }</ProductName>
         <ProductOverview>{ data.Product.power } // Packet of { data.Product.quantity }</ProductOverview>
         <PurchaseDetails>
           <ProductHeader>£{ data.Product.price/100 }</ProductHeader>

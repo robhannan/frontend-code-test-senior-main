@@ -78,3 +78,26 @@ test("should be able to add items to the basket", async () => {
   const basketItems = getByTitle("Basket items");
   expect(basketItems).toHaveTextContent("4");
 });
+
+test("should show a loading screen instead of full page content until the product info is available", async() => {
+  const { queryByText, queryByTitle } = render(
+    <MockedProvider>
+      <Product />
+    </MockedProvider>
+  );
+
+  expect(queryByText('Loading...')).toBeTruthy();
+  expect(queryByTitle('Product')).toBeNull();
+});
+
+test("should show full page content instead of loading screen if product info is available", async() => {
+  const { findByText, queryByText, queryByTitle } = render(
+    <MockedProvider mocks={mocks}>
+      <Product />
+    </MockedProvider>
+  );
+
+  await findByText("Product Name");
+  expect(queryByText('Loading...')).toBeNull();
+  expect(queryByTitle('Product')).toBeTruthy();
+});
