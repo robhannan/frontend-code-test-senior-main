@@ -86,89 +86,89 @@ export default function Product() {
   }
 
   return <div>
-      <Navbar basketQty={basketQty}/>
-      <ProductImage>
-        <img src='/philips-plumen.jpg' alt='Philips Plumen bulb' style={{ width: "100%" }}/>
-      </ProductImage>
-      <ProductDetails>
-        <ProductName title="Product">{ data.Product.name }</ProductName>
-        <ProductOverview>{ data.Product.power } // Packet of { data.Product.quantity }</ProductOverview>
+    <Navbar basketQty={basketQty}/>
+    <ProductImage>
+      <img src={ data.Product.img_url } alt={ data.Product.name + " image"} style={{ width: "100%" }}/>
+    </ProductImage>
+    <ProductDetails>
+      <ProductName title="Product">{ data.Product.name }</ProductName>
+      <ProductOverview>{ data.Product.power } // Packet of { data.Product.quantity }</ProductOverview>
+      <PurchaseDetails>
+        <ProductHeader>£{ data.Product.price/100 }</ProductHeader>
         <PurchaseDetails>
-          <ProductHeader>£{ data.Product.price/100 }</ProductHeader>
-          <PurchaseDetails>
-            <Button
-              variant="contained" 
-              style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }} 
-              disabled={quantity == 1}
-              onClick={decrementQty}>
-                -
-            </Button>
-            <span>
-              Qty
-              <PurchaseQty title="Current quantity">
-                { quantity }
-              </PurchaseQty>
-            </span>
-            <Button
-              variant="contained" 
-              style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
-              onClick={incrementQty}>
-                +
-            </Button>
-          </PurchaseDetails>
+          <Button
+            variant="contained" 
+            style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }} 
+            disabled={quantity == 1}
+            onClick={decrementQty}>
+              -
+          </Button>
+          <span>
+            Qty
+            <PurchaseQty title="Current quantity">
+              { quantity }
+            </PurchaseQty>
+          </span>
+          <Button
+            variant="contained" 
+            style={{ margin:"10px", maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
+            onClick={incrementQty}>
+              +
+          </Button>
         </PurchaseDetails>
-        <Button
-          variant="contained"
-          style={{ 
-            width: "100%", 
-            padding: "15px", 
-            marginTop:"20px", 
-            marginBottom:"20px" 
-          }}
-          onClick={updateBasket}>
-          Add to cart
-        </Button>
+      </PurchaseDetails>
+      <Button
+        variant="contained"
+        style={{ 
+          width: "100%", 
+          padding: "15px", 
+          marginTop:"20px", 
+          marginBottom:"20px" 
+        }}
+        onClick={updateBasket}>
+        Add to cart
+      </Button>
+    </ProductDetails>
+    <ProductDescription>
+      <ProductDetails>
+        <ProductHeader>Description</ProductHeader>
+        <p>{ data.Product.description }</p>
       </ProductDetails>
-      <ProductDescription>
-        <ProductDetails>
-          <ProductHeader>Description</ProductHeader>
-          <p>{ data.Product.description }</p>
-        </ProductDetails>
-      </ProductDescription>
-      <ProductSpecifications>
-        <ProductDetails>
-          <ProductHeader>Specifications</ProductHeader>
-          <SpecificationTable>
-            <tbody>
-              <tr>
-                <td>Brand</td>
-                <td>{ data.Product.brand }</td>
-              </tr>
-              <tr>
-                <td>Item weight</td>
-                <td>{ data.Product.weight }</td>
-              </tr>
-              <tr>
-                <td>Dimensions</td>
-                <td>{ data.Product.height } x { data.Product.width } x { data.Product.length }</td>
-              </tr>
-              <tr>
-                <td>Item Model number</td>
-                <td>{ data.Product.model_code }</td>
-              </tr>
-              <tr>
-                <td>Colour</td>
-                <td>{ data.Product.colour }</td>
-              </tr>
-            </tbody>
-          </SpecificationTable>
-        </ProductDetails>
-      </ProductSpecifications>
-      <PageCopy>
-        Octopus Energy Ltd is a company registered in England and Wales.
-        Registered number: 09263424. Registered office 33 Holborn,
-        London, EC1N 2HT. Trading office: 20-24 Broadwick Street, London,
-        W1F 8HT
-      </PageCopy>
+    </ProductDescription>
+    <ProductSpecifications>
+      <ProductDetails>
+        <ProductHeader>Specifications</ProductHeader>
+        <SpecificationTable>
+          <tbody>
+            <tr>
+              <td>Brand</td>
+              <td>{ data.Product.brand }</td>
+            </tr>
+            <tr>
+              <td>Item weight</td>
+              <td>{ data.Product.weight }</td>
+            </tr>
+            <tr>
+              <td>Dimensions</td>
+              <td>{ data.Product.height } x { data.Product.width } x { data.Product.length }</td>
+            </tr>
+            <tr>
+              <td>Item Model number</td>
+              <td>{ data.Product.model_code }</td>
+            </tr>
+            <tr>
+              <td>Colour</td>
+              <td>{ data.Product.colour }</td>
+            </tr>
+          </tbody>
+        </SpecificationTable>
+      </ProductDetails>
+    </ProductSpecifications>
+    <PageCopy>
+      Octopus Energy Ltd is a company registered in England and Wales.
+      Registered number: 09263424. Registered office 33 Holborn,
+      London, EC1N 2HT. Trading office: 20-24 Broadwick Street, London,
+      W1F 8HT
+    </PageCopy>
   </div>
 }
