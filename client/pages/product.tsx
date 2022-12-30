@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import Button from '@mui/material/Button';
 import React from "react";
 import styled from "styled-components";
+import Footer from '../components/footer';
 import Navbar from "../components/navbar";
 import { GET_PRODUCT } from '../schema/queries.js';
 
@@ -53,15 +54,6 @@ const ProductSpecifications = styled.section`
 
 const SpecificationTable = styled.table`
   border-spacing: 15px;
-`;
-
-const PageCopy = styled.section`
-  padding-left: 20px;
-  padding-right: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: x-small;
-  background-color: var(--hemocyanin);
 `;
 
 export default function Product() {
@@ -164,11 +156,6 @@ export default function Product() {
         </SpecificationTable>
       </ProductDetails>
     </ProductSpecifications>
-    <PageCopy>
-      Octopus Energy Ltd is a company registered in England and Wales.
-      Registered number: 09263424. Registered office 33 Holborn,
-      London, EC1N 2HT. Trading office: 20-24 Broadwick Street, London,
-      W1F 8HT
-    </PageCopy>
+    <Footer/>
   </div>
 }
